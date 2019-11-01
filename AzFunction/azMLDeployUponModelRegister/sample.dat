@@ -1,0 +1,18 @@
+{
+  "topic": "/subscriptions/397f3814-a75b-49eb-a9ae-50a1daa15f51/resourceGroups/test_resource_group/providers/Microsoft.MachineLearningServices/workspaces/test_ml_workspace",
+  "eventType": "Microsoft.MachineLearningServices.ModelRegistered",
+  "subject": "models/ncd-sklearn-model:1",
+  "eventTime": "2019-10-31T00:09:13.7239319Z",
+  "id": "3f8ecd80-f53b-4791-87a9-ecfa61163ee9",
+  "data": {
+    "modelName": "ncd-sklearn-model",
+    "modelVersion": 1,
+    "modelTags": {
+      "ncd": "true",
+      "stage": "production"
+    },
+    "modelProperties": {}
+  },
+  "dataVersion": "1",
+  "metadataVersion": "1"
+}
