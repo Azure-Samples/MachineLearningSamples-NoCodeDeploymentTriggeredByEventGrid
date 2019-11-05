@@ -5,8 +5,13 @@ This sample repo showcases an event-driven way to perform Azure Machine Learning
 ## Prerequsites:
 1. Have an Azure subscription
 2. Register Azure Machine Learning and Azure Event Grid resource providers in your subscription if they are not registered yet. (**Note**: If Azure Machine Learning and Azure Event Grid were registered before Nov. 5, 2019, you will need to re-register them in your subscription. This is an one time thing.) 
-3. Create an Azure Machine Learning workspace
-4. Create a service principal and grant it contributor access to your Azure Machine Learning workspace. **TODO** add CLI command
+3. Create an Azure Machine Learning workspace.
+4. Create a service principal and grant it contributor access to your Azure Machine Learning workspace. You can do that by running following Azure CLI command (ou will need to have owner role of the Azure Machine Learning workspace):
+```
+az ad sp create-for-rbac -n "sp-for-nocodedeployment-azFunction" --role contributor --scopes /subscriptions/{SubID}/resourceGroups/{ResourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{WorkspaceName}
+```
+
+Upon success, Azure CLI will return appId, password, tenant value of the newly provisioned service principal. Write down these values and you will need to use them to set the application settings of your Functions App. See the next section.
 
 ## Deploy the Azure Function
 
