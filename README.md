@@ -26,11 +26,22 @@ func azure functionapp publish <APP_NAME> --build remote
 
 ## Configure Event Grid Trigger
 
-You can configure your Function App triggering based on Event Grid events, and set advanced filtering conditions based on model tags. **TODO**: add more descriptions and screenshots.
+You can configure your Function App triggering based on Event Grid events, and set advanced filtering conditions based on model tags. 
+
+1. Go to Azure portal, choose your functions app, and choose the python function just deployed, then choose "Add Event Grid subscription".
+![Add Event Grid subscription](./Images/AzFunc_AddEventGridSubAdd.png)
+
+2. Set the event subscription basic settings, including "Topic Type" (choose `Microsoft Machine Learning Services`), "Subscription", "Resource Group", "Resource" (your Azure Machine Learning workspace), and "Filter to Event Types" (choose `Model registered`).
+![Event Grid subscription basic](./Images/AzFunc_AddEventGridSubBasic.png)
+
+3. Go to the "Filters" tab, set "Advanced Filters" as below, which essentially means: `data.modelTags.ncd.contains("true") AND data.modelTages.stage.contains("production")`
+![Event Grid subscription filters](./Images/AzFunc_AddEventGridSubFilters.png)
+
+4. Click "Create".
 
 ## Register Model
 
-Run following Azure Machine Learning CLI command.
+Run following Azure Machine Learning CLI command. It registers a model with two tag values (`ncd=true, stage=production`) which match the Event Grid trigger advanced filters configured above.
 ```
 az ml model register -n ncd-sklearn-model -p Model/sklearn_regression_model.pkl --model-framework ScikitLearn --cc 1 --gb 0.5 --tag ncd=true --tag stage=production -g <RESOURCE_GROUP_NAME> -w <WORKSPACE_NAME>
 ```
